@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Resume Screening Tool</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f4f8; }
+
+        .navbar {
+            background: #1e3a5f;
+            padding: 14px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .navbar .logo { color: white; font-size: 1.2rem; font-weight: 700; }
+        .navbar a { color: #90cdf4; text-decoration: none; font-size: 0.9rem; margin-left: 20px; }
+
+        .hero {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2e86de 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+        .hero h1 { font-size: 2.8rem; margin-bottom: 16px; }
+        .hero p  { font-size: 1.15rem; opacity: 0.9; max-width: 550px; margin: auto; }
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            padding: 60px 20px;
+            flex-wrap: wrap;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 45px 35px;
+            width: 300px;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.09);
+            text-align: center;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+        .card .icon  { font-size: 3.5rem; margin-bottom: 18px; }
+        .card h2     { font-size: 1.3rem; color: #1e3a5f; margin-bottom: 10px; }
+        .card p      { color: #666; font-size: 0.95rem; margin-bottom: 25px; line-height: 1.5; }
+        .card ul     { text-align: left; color: #555; font-size: 0.88rem;
+                       margin-bottom: 25px; padding-left: 20px; line-height: 1.8; }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+        .btn:hover { opacity: 0.88; transform: scale(1.02); }
+        .btn-blue  { background: #2e86de; color: white; }
+        .btn-green { background: #27ae60; color: white; }
+
+        .features {
+            background: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .features h2 { color: #1e3a5f; margin-bottom: 35px; font-size: 1.6rem; }
+        .feature-grid {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: auto;
+        }
+        .feature-item {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 20px;
+            width: 190px;
+            font-size: 0.9rem;
+            color: #444;
+        }
+        .feature-item .fi { font-size: 2rem; margin-bottom: 10px; }
+
+        footer {
+            background: #1e3a5f;
+            color: #aac4e0;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">📄 ResumeScreener</div>
+    <div>
+        <a href="/">Home</a>
+        <a href="/applicant">Apply</a>
+        <a href="/hr">HR Panel</a>
+        <a href="/dashboard">Dashboard</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <h1>📄 AI Resume Screening Tool</h1>
+    <p>Smart NLP-powered resume analysis for faster, fairer hiring decisions</p>
+</div>
+
+<div class="cards">
+    <div class="card">
+        <div class="icon">👤</div>
+        <h2>I'm an Applicant</h2>
+        <p>Upload your resume and apply for a position. Get instant feedback on your profile.</p>
+        <ul>
+            <li>Upload PDF or DOCX</li>
+            <li>Auto-extract your skills</li>
+            <li>See your profile summary</li>
+        </ul>
+        <a href="/applicant" class="btn btn-blue">Upload My Resume</a>
+    </div>
+
+    <div class="card">
+        <div class="icon">🏢</div>
+        <h2>I'm HR / Recruiter</h2>
+        <p>Screen resumes against job requirements and get an instant match score.</p>
+        <ul>
+            <li>Upload any resume</li>
+            <li>Set required skills</li>
+            <li>Get match score instantly</li>
+        </ul>
+        <a href="/hr" class="btn btn-green">Screen a Resume</a>
+    </div>
+</div>
+
+<div class="features">
+    <h2>⚡ How It Works</h2>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <div class="fi">📤</div>
+            Upload Resume<br/>(PDF or DOCX)
+        </div>
+        <div class="feature-item">
+            <div class="fi">🤖</div>
+            NLP Extracts<br/>Skills & Info
+        </div>
+        <div class="feature-item">
+            <div class="fi">📊</div>
+            Match Score<br/>Calculated
+        </div>
+        <div class="feature-item">
+            <div class="fi">✅</div>
+            Results Shown<br/>Instantly
+        </div>
+    </div>
+</div>
+
+<footer>
+    &copy; 2026 ResumeScreener &mdash; Built with Spring Boot + NLP
+</footer>
+
+</body>
+</html>

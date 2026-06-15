@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Resume Analysis Result</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; }
+
+        .navbar {
+            background: #1e3a5f; padding: 14px 30px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .navbar .logo { color: white; font-size: 1.2rem; font-weight: 700; }
+        .navbar a { color: #90cdf4; text-decoration: none; font-size: 0.9rem; margin-left: 20px; }
+
+        .page-header {
+            background: linear-gradient(135deg, #1e3a5f, #2e86de);
+            color: white; text-align: center; padding: 35px 20px;
+        }
+        .page-header h1 { font-size: 1.8rem; }
+
+        .container { display: flex; justify-content: center; padding: 40px 20px; }
+
+        .result-card {
+            background: white; padding: 40px; border-radius: 16px;
+            width: 580px; box-shadow: 0 6px 25px rgba(0,0,0,0.09);
+        }
+
+        .success-msg {
+            background: #d1fae5; border: 1px solid #6ee7b7;
+            color: #065f46; padding: 14px; border-radius: 8px;
+            margin-bottom: 25px; font-weight: 600; text-align: center;
+        }
+
+        .section-title {
+            font-size: 1rem; font-weight: 700; color: #1e3a5f;
+            margin: 20px 0 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;
+        }
+
+        .info-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 10px;
+        }
+        .info-item label {
+            font-size: 0.78rem; color: #888; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .info-item span {
+            display: block; font-size: 0.97rem; color: #222; font-weight: 500; margin-top: 3px;
+        }
+
+        /* Score box */
+        .score-box {
+            border-radius: 12px; padding: 25px; text-align: center; margin: 25px 0;
+        }
+        .score-high   { background: #d1fae5; border: 2px solid #6ee7b7; }
+        .score-medium { background: #fef3c7; border: 2px solid #fcd34d; }
+        .score-low    { background: #fee2e2; border: 2px solid #fca5a5; }
+
+        .score-number { font-size: 3.5rem; font-weight: 800; }
+        .score-high   .score-number { color: #065f46; }
+        .score-medium .score-number { color: #92400e; }
+        .score-low    .score-number { color: #991b1b; }
+
+        .score-label { font-size: 1.1rem; font-weight: 600; margin-top: 5px; }
+        .score-high   .score-label { color: #065f46; }
+        .score-medium .score-label { color: #92400e; }
+        .score-low    .score-label { color: #991b1b; }
+
+        /* Progress bar */
+        .progress-bar {
+            background: #e2e8f0; border-radius: 20px; height: 10px;
+            margin-top: 14px; overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%; border-radius: 20px; transition: width 1s ease;
+        }
+        .score-high   .progress-fill { background: #10b981; }
+        .score-medium .progress-fill { background: #f59e0b; }
+        .score-low    .progress-fill { background: #ef4444; }
+
+        /* Skill badges */
+        .badge {
+            display: inline-block; padding: 5px 13px; border-radius: 20px;
+            font-size: 0.82rem; font-weight: 600; margin: 4px;
+        }
+        .badge-found   { background: #dbeafe; color: #1e40af; }
+        .badge-missing { background: #fee2e2; color: #b91c1c; }
+        .badge-required { background: #dcfce7; color: #166534; }
+
+        /* Action buttons */
+        .btn-row { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+        .btn {
+            padding: 11px 22px; border-radius: 8px; text-decoration: none;
+            font-weight: 700; font-size: 0.9rem; transition: opacity 0.2s;
+        }
+        .btn:hover { opacity: 0.85; }
+        .btn-blue  { background: #2e86de; color: white; }
+        .btn-green { background: #27ae60; color: white; }
+        .btn-gray  { background: #6b7280; color: white; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">📄 ResumeScreener</div>
+    <div>
+        <a href="/">Home</a>
+        <a href="/applicant">Apply</a>
+        <a href="/hr">HR Panel</a>
+        <a href="/dashboard">Dashboard</a>
+    </div>
+</nav>
+
+<div class="page-header">
+    <h1>📋 Resume Analysis Result</h1>
+</div>
+
+<div class="container">
+    <div class="result-card">
+
+        <!-- Applicant success message -->
+        <div class="success-msg" th:if="${message}" th:text="${message}"></div>
+
+        <!-- Candidate Info -->
+        <div class="section-title">👤 Candidate Information</div>
+        <div class="info-grid">
+            <div class="info-item">
+                <label>Full Name</label>
+                <span th:text="${resume.candidateName}">—</span>
+            </div>
+            <div class="info-item">
+                <label>Job Applied For</label>
+                <span th:text="${resume.jobTitle}">—</span>
+            </div>
+            <div class="info-item">
+                <label>Email</label>
+                <span th:text="${resume.email}">—</span>
+            </div>
+            <div class="info-item">
+                <label>Phone</label>
+                <span th:text="${resume.phone}">—</span>
+            </div>
+            <div class="info-item">
+                <label>Experience</label>
+                <span th:text="${resume.experienceYears} + ' year(s)'">—</span>
+            </div>
+            <div class="info-item">
+                <label>Education</label>
+                <span th:text="${education}">—</span>
+            </div>
+        </div>
+
+        <!-- Skills Found -->
+        <div class="section-title">🛠️ Skills Detected</div>
+        <div>
+            <span th:each="skill : ${skillList}"
+                  class="badge badge-found"
+                  th:text="${skill}"></span>
+            <span th:if="${#lists.isEmpty(skillList)}"
+                  style="color:#999; font-size:0.9rem;">No skills detected</span>
+        </div>
+
+        <!-- HR ONLY: Match Score -->
+        <div th:if="${!isApplicant}">
+
+            <div class="section-title">📊 Match Score</div>
+            <div class="score-box" th:classappend="${scoreClass}">
+                <div class="score-number" th:text="${resume.matchScore} + '%'"></div>
+                <div class="score-label" th:text="${scoreLabel}"></div>
+                <div class="progress-bar">
+                    <div class="progress-fill"
+                         th:style="'width:' + ${resume.matchScore} + '%'"></div>
+                </div>
+            </div>
+
+            <!-- Required Skills -->
+            <div class="section-title">✅ Required Skills</div>
+            <div>
+                <span th:each="skill : ${requiredSkills}"
+                      class="badge badge-required"
+                      th:text="${skill}"></span>
+            </div>
+
+            <!-- Missing Skills -->
+            <div th:if="${!#lists.isEmpty(missingSkills)}">
+                <div class="section-title">❌ Missing Skills</div>
+                <div>
+                    <span th:each="skill : ${missingSkills}"
+                          class="badge badge-missing"
+                          th:text="${skill}"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="btn-row">
+            <a href="/hr"        class="btn btn-green"
+               th:if="${!isApplicant}">🔍 Screen Another</a>
+            <a href="/applicant" class="btn btn-blue"
+               th:if="${isApplicant}">📤 Submit Another</a>
+            <a href="/dashboard" class="btn btn-blue"
+               th:if="${!isApplicant}">📋 View Dashboard</a>
+            <a href="/"          class="btn btn-gray">🏠 Home</a>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
